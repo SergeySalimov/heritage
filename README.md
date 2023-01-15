@@ -4,6 +4,9 @@
 ### Starting date 14/01/2023
 Code developed under node version: 16.3.2
 
+#### 15/01/2023
+- deploy on netlify
+
 #### 14/01/2023 - 15/01/2023
 - set up ide, node, repo 
 - created initial nest project
