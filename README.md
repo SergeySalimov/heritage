@@ -1,11 +1,42 @@
 # HERITAGE
+
 ## Site is under construction....
 
+## NODE VERSION
+
+```
+16.3.2
+```
+
+## Installation
+
+```bash
+$ npm install
+```
+
+## Create MongoDb Container by Docker (if needed)
+
+```bash
+$ start-mongo-db.sh
+```
+
+## Running the app
+
+```bash
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
+```
+
 ### Starting date 14/01/2023
-Code developed under node version: 16.3.2
 
 #### 15/01/2023
-- deploy on netlify
+- deploy on netlify (failed)
 
 #### 14/01/2023 - 15/01/2023
 - set up ide, node, repo 
