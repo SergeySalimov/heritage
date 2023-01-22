@@ -1,0 +1,34 @@
+<ng-container *ngIf="{ isHandset: isHandset$ | async } as data">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+                 [attr.role]="data.isHandset ? 'dialog' : 'navigation'"
+                 [mode]="data.isHandset ? 'over' : 'side'"
+                 [opened]="data.isHandset === false">
+      <mat-toolbar>Menu</mat-toolbar>
+      <mat-nav-list>
+        <mat-divider></mat-divider>
+        <a mat-list-item href="#">Регистрация</a>
+        <mat-divider></mat-divider>
+        <a mat-list-item href="#">Вход</a>
+        <mat-divider></mat-divider>
+        <a mat-list-item href="#">Информация</a>
+        <mat-divider></mat-divider>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="data.isHandset">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span>Семейное дерево</span>
+        <span class="app-spacer"></span>
+      </mat-toolbar>
+      <ng-content></ng-content>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-container>
