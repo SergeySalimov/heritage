@@ -7,7 +7,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { appReducer, getInitialAppState } from './app.state';
 import { AppComponent } from './app.component';
-import { NavigationModule } from './modules/navigation/navigation.module';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +18,7 @@ import { NavigationModule } from './modules/navigation/navigation.module';
     StoreModule.forRoot(appReducer, { initialState: getInitialAppState() }),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    NavigationModule,
+    PagesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
