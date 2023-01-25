@@ -4,9 +4,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'app-page-wrapper',
   template: `
     <app-navigation>
-      <router-outlet></router-outlet>
+      <div class="page-wrapper">
+        <router-outlet></router-outlet>
+      </div>
     </app-navigation>
   `,
+  styles: [`
+    .page-wrapper {
+      min-height: calc(100vh - 64px);
+    }
+  `],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PageWrapperComponent {}

@@ -4,8 +4,34 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.main-container {
+  height: calc(100vh - 64px);
+}
+
+.w-100 {
+  width: 100% !important;
+}
+
 .text-ellipsis {
   white-space: nowrap; /* Запрещаем перенос строк */
   overflow: hidden; /* Обрезаем все, что не помещается в область */
   text-overflow: ellipsis !important; /* Добавляем многоточие */
 }
+
+.app-spacer {
+  flex: 1 1 auto;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
