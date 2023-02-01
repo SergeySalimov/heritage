@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Prop } from '@nestjs/mongoose';
 import { IsEmail, IsString, Length } from 'class-validator';
 
-export enum Sex {
+export enum Gender {
   MAN = 'Man',
   WOMAN = 'Woman',
 }
@@ -25,7 +25,7 @@ export class UserDto extends LoginUserDto {
   @ApiProperty({ example: 'Smith', description: 'User surname' })
   @IsString({ message: 'Must be a string' })
   surname: string;
-  @ApiProperty({ example: 'Man', description: 'User sex', enum: Sex })
-  @Prop({ required: true, type: String, enum: Sex })
-  sex: string;
+  @ApiProperty({ example: 'Man', description: 'User gender', enum: Gender })
+  @Prop({ required: true, type: String, enum: Gender })
+  gender: Gender;
 }
