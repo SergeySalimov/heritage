@@ -1,11 +1,11 @@
-import { ISexEnum } from '../interfaces/user';
+import { GenderEnum } from '../interfaces/user';
 import { createFeature, createFeatureSelector, createReducer, createSelector } from '@ngrx/store';
 
 export interface UserState {
   name: string | null;
   surname: string | null;
   email: string | null;
-  sex: ISexEnum | null,
+  sex: GenderEnum | null,
   loading: boolean;
 }
 
