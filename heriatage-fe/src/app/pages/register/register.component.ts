@@ -3,7 +3,6 @@ import { RegisterFormComponent } from '../../components/register-form/register-f
 import { Store } from '@ngrx/store';
 
 @Component({
-  selector: 'app-authenticate',
   standalone: true,
   imports: [
     RegisterFormComponent,
@@ -15,6 +14,6 @@ import { Store } from '@ngrx/store';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthenticateComponent {
+export class RegisterComponent {
   private store = inject(Store);
 }

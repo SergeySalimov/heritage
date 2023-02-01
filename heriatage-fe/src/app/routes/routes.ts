@@ -11,10 +11,15 @@ export const routes: Routes = [
     providers: [AuthGuard, NoAuthGuard],
     children: [
       {
-        path: 'authenticate',
-        title: 'Authenticate user',
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
+      },
+      {
+        path: 'register',
+        title: 'User registration',
         canActivate: [NoAuthGuard],
-        loadComponent: () => import('../pages/authenticate/authenticate.component').then(c => c.AuthenticateComponent),
+        loadComponent: () => import('../pages/register/register.component').then(c => c.RegisterComponent),
       },
       {
         path: 'login',
