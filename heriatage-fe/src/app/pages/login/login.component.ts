@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { LoginFormComponent } from '../../components/login-form/login-form.component';
+import { LoginFormComponent } from '../../core/components/login-form/login-form.component';
 import { Store } from '@ngrx/store';
 
 @Component({
