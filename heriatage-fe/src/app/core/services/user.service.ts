@@ -7,14 +7,13 @@ import { UserLoginInterface } from '../components/login-form/login-form.componen
 @Injectable({ providedIn: 'root' })
 export class UserService {
   private http = inject(HttpClient);
-  static readonly baseURL = 'api';
+  static readonly baseURL = 'api/auth';
 
   registerUser(user: UserRegisterInterface): Observable<{ token: string }> {
-    console.log(user);
-    return this.http.post<{ token: string }>(`${UserService.baseURL}/register`, { user });
+    return this.http.post<{ token: string }>(`${UserService.baseURL}/registration`, user);
   }
 
   loginUser(user: UserLoginInterface): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(`${UserService.baseURL}/login`, { user });
+    return this.http.post<{ token: string }>(`${UserService.baseURL}/login`, user);
   }
 }

@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-content>
-    <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
       <h2>Регистрация</h2>
       <mat-error *ngIf="registerInvalid">Ошибка при регистрации пользователя</mat-error>
       <mat-form-field>
@@ -26,7 +26,7 @@
         <input matInput type="password" placeholder="Пароль" [(ngModel)]="registerUser.password" name="password" required minlength="4" maxlength="16">
         <mat-error>Введите пароль не менее 4 и не более 16 символов</mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" [disabled]="false">Зарегистрировать</button>
+      <button mat-raised-button color="primary" [disabled]="!registerForm.form.valid">Зарегистрировать</button>
     </form>
   </mat-card-content>
 </mat-card>
