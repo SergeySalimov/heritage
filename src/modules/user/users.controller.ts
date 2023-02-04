@@ -4,9 +4,10 @@ import { User } from './schemas/user.schema';
 import { UserDto } from './schemas/user';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../../core/guards/jwt-auth.guard';
+import { ROUTE_PREFIX } from '../../core/constants/routes';
 
 @ApiTags('Users')
-@Controller('api/users')
+@Controller(`${ROUTE_PREFIX}/users`)
 export class UsersController {
   constructor(private userService: UsersService) {}
 

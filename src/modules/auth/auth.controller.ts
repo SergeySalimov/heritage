@@ -4,9 +4,10 @@ import { LoginUserDto, UserDto } from '../user/schemas/user';
 import { AuthService } from './auth.service';
 import { TokenDto } from './schemas/auth';
 import { ValidationPipe } from '../../core/pipes/validation.pipe';
+import { ROUTE_PREFIX } from '../../core/constants/routes';
 
 @ApiTags('Authentication')
-@Controller('api/auth')
+@Controller(`${ROUTE_PREFIX}/auth`)
 export class AuthController {
   constructor(private authService: AuthService) {}
 
