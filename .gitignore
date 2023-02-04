@@ -55,5 +55,4 @@ yarn-error.log*
 lerna-debug.log*
 
 #Output folder for SPA
-public/*
-!public/index.html
+/public/*
