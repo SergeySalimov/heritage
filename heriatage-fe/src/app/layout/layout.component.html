@@ -15,7 +15,7 @@
           <mat-divider></mat-divider>
           <a mat-list-item routerLink="information" routerLinkActive="active">Информация</a>
           <mat-divider></mat-divider>
-          <a mat-list-item>Выход</a>
+          <a mat-list-item (click)="logOut()">Выход</a>
           <mat-divider></mat-divider>
         </ng-container>
         <ng-template #needToLoginUser>

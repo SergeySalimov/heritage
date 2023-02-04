@@ -26,6 +26,7 @@ export interface UserLoginInterface {
 })
 export class LoginFormComponent {
   @Input() loginInvalid = false;
+  @Input() loading: boolean | undefined;
   @Output() userLoginChange: EventEmitter<UserLoginInterface> = new EventEmitter<UserLoginInterface>();
   public loginUser: UserLoginInterface = {
     email: '',

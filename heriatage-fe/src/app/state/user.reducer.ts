@@ -1,6 +1,6 @@
 import { IUser } from '../core/interfaces/user';
 import { createFeature, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import { UserApiActions } from './user.actions';
+import { UserActions, UserApiActions } from './user.actions';
 
 export interface UserState {
   user: IUser,
@@ -18,20 +18,34 @@ export const initialState: UserState = {
   loading: false,
 }
 
-export const userFeatureKey = 'user';
+export const userFeatureKey = 'userState';
 
 export const userFeature = createFeature({
   name: userFeatureKey,
   reducer: createReducer(
     initialState,
-    on(UserApiActions.registerUser, (state, {user: {name, email, gender, surname}}) => ({
+    on(UserApiActions.registerUser, (state, { user: { name, email, gender, surname } }) => ({
         ...state, user: {...state.user, name, surname, email, gender }, loading: true,
       }),
     ),
-    on(UserApiActions.registerUserSuccess, (state, { token }) => ({ ...state, token, loading: false })),
-    on(UserApiActions.registerUserFailure, (state, { error }) => ({ ...state, error, user: initialUser() ,loading: false })),
+    on(UserApiActions.loginUser, (state, { user: { email }}) =>
+      ({ ...state, user: { ...state.user, email }, loading: true }),
+    ),
+    on(
+      UserApiActions.registerUserSuccess,
+      UserApiActions.loginUserSuccess,
+      (state, { token }) => ({ ...state, token, loading: false }),
+    ),
+    on(
+      UserApiActions.registerUserFailure,
+      UserApiActions.loginUserFailure,
+      (state, { error }) => ({ ...state, error, user: initialUser(), loading: false }),
+    ),
+    on(UserActions.logout, state => ({ ...state, user: initialUser() }))
   ),
 });
+
+export const { selectLoading } = userFeature;
 
 export const selectUser = createFeatureSelector<UserState>(userFeatureKey);
 export const isUserLogged = createSelector(selectUser, (state: UserState) => !!state.user.email);

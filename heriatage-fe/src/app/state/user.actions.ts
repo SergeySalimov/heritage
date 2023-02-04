@@ -6,6 +6,7 @@ export const UserActions = createActionGroup({
   source: 'User Page',
   events: {
     'Enter': emptyProps(),
+    'Logout': emptyProps(),
   },
 });
 
@@ -15,8 +16,8 @@ export const UserApiActions = createActionGroup({
     'Register User': props<{ user: UserRegisterInterface }>(),
     'Register User Success': props<{ token: string }>(),
     'Register User Failure': props<{ error: string }>(), // TODO need to describe errors
-    'Login': props<{ user: UserLoginInterface }>(),
+    'Login User': props<{ user: UserLoginInterface }>(),
     'Login User Success': props<{ token: string }>(),
-    'Login User Fail': props<{ error: string }>(), // TODO need to describe errors
+    'Login User Failure': props<{ error: string }>(), // TODO need to describe errors
   },
 });

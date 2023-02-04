@@ -31,6 +31,7 @@ export interface UserRegisterInterface extends UserLoginInterface {
 })
 export class RegisterFormComponent {
   @Input() registerInvalid = false;
+  @Input() loading: boolean | undefined;
   @Output()  userRegisterChange: EventEmitter<UserRegisterInterface> = new EventEmitter<UserRegisterInterface>();
   public registerUser: UserRegisterInterface = {
     name: '',
