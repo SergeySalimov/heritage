@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-card-content>
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit()">
+      <h2>Регистрация</h2>
+      <mat-error *ngIf="registerInvalid">Ошибка при регистрации пользователя</mat-error>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Имя" [(ngModel)]="registerUser.name" name="name" required minlength="2" maxlength="30">
+        <mat-error>Введите по крайней мере 2 символа для имени</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Фамилия" [(ngModel)]="registerUser.surname" name="surname" required minlength="2" maxlength="30">
+        <mat-error>Введите по крайней мере 2 символа для фамилии</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Пол" [(ngModel)]="registerUser.gender" name="gender" required>
+          <mat-option [value]="GenderEnum.MAN">Мужской</mat-option>
+          <mat-option [value]="GenderEnum.WOMAN">Женский</mat-option>
+        </mat-select>
+        <mat-error>Введите ваш пол</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="email" placeholder="Почта" [(ngModel)]="registerUser.email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+        <mat-error>Введите валидный почтовый адрес</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Пароль" [(ngModel)]="registerUser.password" name="password" required minlength="4" maxlength="16">
+        <mat-error>Введите пароль не менее 4 и не более 16 символов</mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="!registerForm.form.valid">Зарегистрировать</button>
+    </form>
+  </mat-card-content>
+</mat-card>
