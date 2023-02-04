@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "heriatage-fe": {
+    "front": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/heriatage-fe",
+            "outputPath": "dist/front",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -68,15 +68,15 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "heriatage-fe:build",
+            "browserTarget": "front:build",
             "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
-              "browserTarget": "heriatage-fe:build:production"
+              "browserTarget": "front:build:production"
             },
             "development": {
-              "browserTarget": "heriatage-fe:build:development"
+              "browserTarget": "front:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "heriatage-fe:build"
+            "browserTarget": "front:build"
           }
         },
         "test": {
@@ -110,7 +110,7 @@
       }
     }
   },
-  "defaultProject": "heriatage-fe",
+  "defaultProject": "front",
   "cli": {
     "schematicCollections": [
       "@ngrx/schematics"
