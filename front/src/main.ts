@@ -10,17 +10,28 @@ import { AppComponent } from './app/app.component';
 import { routes } from './app/routes/routes';
 import { userFeature } from './app/state/user.reducer';
 import { UserEffects } from './app/state/user.effects';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import {
+  getLocalStorage,
+  getSessionStorage,
+  LOCAL_STORAGE,
+  SESSION_STORAGE
+} from './app/core/services/storage.service';
+import { authInterceptor } from './app/core/interceptors';
+import { alertFeature } from './app/state/alert.reducer';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     provideRouter(routes),
     provideStore(),
     provideState(userFeature),
+    provideState(alertFeature),
     provideEffects(UserEffects),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
     provideRouterStore(),
     importProvidersFrom(BrowserAnimationsModule),
-],
+    { provide: LOCAL_STORAGE, useFactory: () => getLocalStorage() },
+    { provide: SESSION_STORAGE, useFactory: () => getSessionStorage() },
+  ],
 }).catch(err => console.error(err));

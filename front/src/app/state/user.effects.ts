@@ -2,15 +2,21 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { UserService } from '../core/services/user.service';
 import { UserActions, UserApiActions } from './user.actions';
-import { catchError, exhaustMap, of, tap } from 'rxjs';
+import { catchError, exhaustMap, mergeMap, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { StorageService, StorageType, TOKEN_STORAGE_KEY } from '../core/services/storage.service';
+import { ApiUtils } from '../core/utils/api-utils';
+import { AlertActions } from './alert.actions';
+import { TOKEN_EXPIRED_ALERT } from './alert.reducer';
 
 @Injectable({ providedIn: 'root' })
 export class UserEffects {
   private actions$ = inject(Actions);
   private userService = inject(UserService);
+  private storageService = inject(StorageService);
   private router = inject(Router);
+  private tokenKey = inject(TOKEN_STORAGE_KEY);
 
   registerUser$ = createEffect(() => this.actions$.pipe(
     ofType(UserApiActions.registerUser),
@@ -33,11 +39,27 @@ export class UserEffects {
       UserApiActions.loginUserSuccess,
       UserApiActions.registerUserSuccess,
     ),
-    tap(() => this.router.navigateByUrl('/tree')),
+    tap((action) => {
+      const token: string = action.token;
+      const expDate: number|null = ApiUtils.getExpInMstFromJWT(token);
+      this.storageService.set(this.tokenKey, token, StorageType.Session, expDate);
+      this.router.navigate(['tree']);
+    }),
   ), { dispatch: false });
+
+  tokenExpired$ = createEffect(() => this.actions$.pipe(
+    ofType(UserActions.tokenExpired),
+    mergeMap(() => [
+      UserActions.logout(),
+      AlertActions.showAlert({ alert: TOKEN_EXPIRED_ALERT })
+    ]),
+  ));
 
   logout$ = createEffect(() => this.actions$.pipe(
     ofType(UserActions.logout),
-    tap(() => this.router.navigateByUrl('/login')),
+    tap(() => {
+      this.storageService.delete(this.tokenKey, StorageType.Session);
+      this.router.navigate(['login']);
+    }),
   ), { dispatch: false });
 }

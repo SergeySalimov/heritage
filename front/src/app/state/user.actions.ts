@@ -7,6 +7,7 @@ export const UserActions = createActionGroup({
   events: {
     'Enter': emptyProps(),
     'Logout': emptyProps(),
+    'Token expired': emptyProps(),
   },
 });
 

@@ -4,7 +4,6 @@ import { UserActions, UserApiActions } from './user.actions';
 
 export interface UserState {
   user: IUser,
-  error: string | null;
   token: string | null;
   loading: boolean;
 }
@@ -13,7 +12,6 @@ const initialUser = (): IUser => ({ name: null, surname: null, email: null, gend
 
 export const initialState: UserState = {
   user: initialUser(),
-  error: null,
   token: null,
   loading: false,
 }
@@ -41,7 +39,7 @@ export const userFeature = createFeature({
       UserApiActions.loginUserFailure,
       (state, { error }) => ({ ...state, error, user: initialUser(), loading: false }),
     ),
-    on(UserActions.logout, state => ({ ...state, user: initialUser() }))
+    on(UserActions.logout, state => ({ ...state, user: initialUser(), token: null })),
   ),
 });
 

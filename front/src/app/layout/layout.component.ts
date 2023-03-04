@@ -10,12 +10,16 @@ import { NgIf } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LetModule } from '@ngrx/component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { isUserLogged } from '../state/user.reducer';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ModalComponent } from '../core/components/ui-blocks/modal/modal.component';
 import { YesOrNo } from '../core/interfaces/common';
 import { UserActions } from '../state/user.actions';
+import { SnackbarComponent } from '../core/components/ui-blocks/snackbar/snackbar.component';
+import * as fromAlert from '../state/alert.reducer';
+import { AlertActions } from '../state/alert.actions';
+import { IAlert } from '../state/alert.reducer';
 
 @Component({
   selector: 'app-layout',
@@ -31,6 +35,7 @@ import { UserActions } from '../state/user.actions';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
+    SnackbarComponent,
   ],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
@@ -38,13 +43,14 @@ import { UserActions } from '../state/user.actions';
 export class LayoutComponent {
   private dialog = inject(MatDialog);
   private store = inject(Store);
-  breakpointObserver = inject(BreakpointObserver);
+  private breakpointObserver = inject(BreakpointObserver);
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map((result: BreakpointState) => result.matches),
     shareReplay()
   );
   isUserLogged$: Observable<boolean> = this.store.select(isUserLogged);
+  alerts$: Observable<IAlert|null> = this.store.select(fromAlert.selectAlert);
 
   logOut(): void {
     const dialogRef: MatDialogRef<ModalComponent> = this.dialog.open(ModalComponent, {
@@ -58,5 +64,9 @@ export class LayoutComponent {
         this.store.dispatch(UserActions.logout());
       }
     });
+  }
+
+  onCloseAlert(): void {
+    this.store.dispatch(AlertActions.removeAlert());
   }
 }

@@ -17,3 +17,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.mat-mdc-snack-bar-container {
+  &.blue-snackbar {
+    --mdc-snackbar-container-color: #2196f3;
+    --mat-mdc-snack-bar-button-color: #ccc;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+  &.error-snackbar {
+    --mdc-snackbar-container-color: #f32175;
+    --mat-mdc-snack-bar-button-color: #fff;
+    --mdc-snackbar-supporting-text-color: #fff;
+  }
+}
+
