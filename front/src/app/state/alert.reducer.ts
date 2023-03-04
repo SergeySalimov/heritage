@@ -18,7 +18,7 @@ export interface AlertState {
 }
 
 export const initialState: AlertState = {
-  alert: TOKEN_EXPIRED_ALERT,
+  alert: null,
 }
 
 export const alertFeatureKey = 'alertState';
