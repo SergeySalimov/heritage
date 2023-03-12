@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { LoginFormComponent, UserLoginInterface } from '../../core/components/login-form/login-form.component';
 import { Store } from '@ngrx/store';
-import * as fromUser from '../../state/user.reducer';
-import { UserApiActions } from '../../state/user.actions';
+import * as fromUser from '../../state/user/user.reducer';
+import { UserApiActions } from '../../state/user/user.actions';
 import { Observable } from 'rxjs';
 import { LetModule, PushModule } from '@ngrx/component';
 import { NgIf } from '@angular/common';

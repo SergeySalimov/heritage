@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { StorageService, StorageType, TOKEN_STORAGE_KEY } from '../services/storage.service';
 import { AUTH_URL_TOKEN } from '../services/tokens';
 import { Store } from '@ngrx/store';
-import { UserActions } from '../../state/user.actions';
+import { UserActions } from '../../state/user/user.actions';
 
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   const authUrl = inject(AUTH_URL_TOKEN);

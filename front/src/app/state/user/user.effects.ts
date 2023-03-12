@@ -1,14 +1,14 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { UserService } from '../core/services/user.service';
+import { UserService } from '../../core/services/user.service';
 import { UserActions, UserApiActions } from './user.actions';
 import { catchError, exhaustMap, mergeMap, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { StorageService, StorageType, TOKEN_STORAGE_KEY } from '../core/services/storage.service';
-import { ApiUtils } from '../core/utils/api-utils';
-import { AlertActions } from './alert.actions';
-import { TOKEN_EXPIRED_ALERT } from './alert.reducer';
+import { StorageService, StorageType, TOKEN_STORAGE_KEY } from '../../core/services/storage.service';
+import { ApiUtils } from '../../core/utils/api-utils';
+import { AlertActions } from '../alert/alert.actions';
+import { TOKEN_EXPIRED_ALERT } from '../alert/alert.reducer';
 
 @Injectable({ providedIn: 'root' })
 export class UserEffects {

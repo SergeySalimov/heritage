@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { LayoutComponent } from '../layout/layout.component';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { UserActions } from '../state/user.actions';
+import { UserActions } from '../state/user/user.actions';
 
 @Component({
   selector: 'app-home',

@@ -15,7 +15,7 @@ import { MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { AlertEnum, IAlert } from '../../../../state/alert.reducer';
+import { AlertEnum, IAlert } from '../../../../state/alert/alert.reducer';
 
 @Component({
   selector: 'app-snackbar',

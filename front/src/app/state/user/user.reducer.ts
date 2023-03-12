@@ -1,4 +1,4 @@
-import { IUser } from '../core/interfaces/user';
+import { IUser } from '../../core/interfaces/user';
 import { createFeature, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import { UserActions, UserApiActions } from './user.actions';
 

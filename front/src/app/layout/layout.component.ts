@@ -12,14 +12,14 @@ import { LetModule } from '@ngrx/component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { isUserLogged } from '../state/user.reducer';
+import { isUserLogged } from '../state/user/user.reducer';
 import { ModalComponent } from '../core/components/ui-blocks/modal/modal.component';
 import { YesOrNo } from '../core/interfaces/common';
-import { UserActions } from '../state/user.actions';
+import { UserActions } from '../state/user/user.actions';
 import { SnackbarComponent } from '../core/components/ui-blocks/snackbar/snackbar.component';
-import * as fromAlert from '../state/alert.reducer';
-import { AlertActions } from '../state/alert.actions';
-import { IAlert } from '../state/alert.reducer';
+import * as fromAlert from '../state/alert/alert.reducer';
+import { AlertActions } from '../state/alert/alert.actions';
+import { IAlert } from '../state/alert/alert.reducer';
 
 @Component({
   selector: 'app-layout',

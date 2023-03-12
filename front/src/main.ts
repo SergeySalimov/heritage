@@ -8,8 +8,8 @@ import { provideRouter } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/routes/routes';
-import { userFeature } from './app/state/user.reducer';
-import { UserEffects } from './app/state/user.effects';
+import { userFeature } from './app/state/user/user.reducer';
+import { UserEffects } from './app/state/user/user.effects';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   getLocalStorage,
@@ -18,7 +18,7 @@ import {
   SESSION_STORAGE
 } from './app/core/services/storage.service';
 import { authInterceptor } from './app/core/interceptors';
-import { alertFeature } from './app/state/alert.reducer';
+import { alertFeature } from './app/state/alert/alert.reducer';
 
 bootstrapApplication(AppComponent, {
   providers: [
