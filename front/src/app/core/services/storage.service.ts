@@ -52,7 +52,7 @@ export class StorageService {
 
     try {
       const storedObj = JSON.parse(storedValue);
-      if (!Object.hasOwn(storedObj, 'invalidAt')) {
+      if (!Object.prototype.hasOwnProperty.call(storedObj, 'invalidAt')) {
         return storedObj;
       }
       if (!storedObj.invalidAt) {
