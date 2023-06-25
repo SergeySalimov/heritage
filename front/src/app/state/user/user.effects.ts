@@ -1,14 +1,14 @@
 import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { UserService } from '../../core/services/user.service';
-import { UserActions, UserApiActions } from './user.actions';
 import { catchError, exhaustMap, mergeMap, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import * as UserActions from 'src/app/state/user/user.actions';
+import * as AlertActions from 'src/app/state/alert/alert.actions';
+import { TOKEN_EXPIRED_ALERT } from '../alert/alert.reducer';
+import { UserService } from '../../core/services/user.service';
 import { StorageService, StorageType, TOKEN_STORAGE_KEY } from '../../core/services/storage.service';
 import { ApiUtils } from '../../core/utils/api-utils';
-import { AlertActions } from '../alert/alert.actions';
-import { TOKEN_EXPIRED_ALERT } from '../alert/alert.reducer';
 
 @Injectable({ providedIn: 'root' })
 export class UserEffects {
@@ -19,25 +19,25 @@ export class UserEffects {
   private tokenKey = inject(TOKEN_STORAGE_KEY);
 
   registerUser$ = createEffect(() => this.actions$.pipe(
-    ofType(UserApiActions.registerUser),
+    ofType(UserActions.registerUser),
     exhaustMap((action) => this.userService.registerUser(action.user).pipe(
-      map(({ token }) => UserApiActions.registerUserSuccess({ token })),
-      catchError((error) => of(UserApiActions.registerUserFailure({ error }))),
+      map(({ token }) => UserActions.registerUserSuccess({ token })),
+      catchError((error) => of(UserActions.registerUserFailure({ error }))),
     )),
   ));
 
   loginUser$ = createEffect(() => this.actions$.pipe(
-    ofType(UserApiActions.loginUser),
+    ofType(UserActions.loginUser),
     exhaustMap((action) => this.userService.loginUser(action.user).pipe(
-      map(({ token }) => UserApiActions.loginUserSuccess({ token })),
-      catchError((error) => of(UserApiActions.loginUserFailure({ error }))),
+      map(({ token }) => UserActions.loginUserSuccess({ token })),
+      catchError((error) => of(UserActions.loginUserFailure({ error }))),
     )),
   ));
 
   afterAuthSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(
-      UserApiActions.loginUserSuccess,
-      UserApiActions.registerUserSuccess,
+      UserActions.loginUserSuccess,
+      UserActions.registerUserSuccess,
     ),
     tap((action) => {
       const token: string = action.token;

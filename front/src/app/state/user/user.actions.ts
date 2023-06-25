@@ -1,24 +1,27 @@
-import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { UserRegisterInterface } from '../../core/components/register-form/register-form.component';
-import { UserLoginInterface } from '../../core/components/login-form/login-form.component';
+import { createAction, props } from "@ngrx/store";
+import { UserRegisterInterface } from "../../core/components/register-form/register-form.component";
+import { UserLoginInterface } from "../../core/components/login-form/login-form.component";
 
-export const UserActions = createActionGroup({
-  source: 'User Page',
-  events: {
-    'Enter': emptyProps(),
-    'Logout': emptyProps(),
-    'Token expired': emptyProps(),
-  },
-});
+export enum UserActionTypes {
+  EnterPage = '[User Page] Enter',
+  LogoutPage = '[User Page] Logout',
+  TokenExpiredPage = '[User Page] Token expired',
+  // API part
+  RegisterUser = '[User API] Register User',
+  RegisterUserSuccess = '[User API] Register User Success',
+  RegisterUserFailure = '[User API] Register User Failure',
+  LoginUser = '[User API] Login User',
+  LoginUserSuccess = '[User API] Login User Success',
+  LoginUserFailure = '[User API] Login User Failure',
+}
 
-export const UserApiActions = createActionGroup({
-  source: 'User/API',
-  events: {
-    'Register User': props<{ user: UserRegisterInterface }>(),
-    'Register User Success': props<{ token: string }>(),
-    'Register User Failure': props<{ error: string }>(), // TODO need to describe errors
-    'Login User': props<{ user: UserLoginInterface }>(),
-    'Login User Success': props<{ token: string }>(),
-    'Login User Failure': props<{ error: string }>(), // TODO need to describe errors
-  },
-});
+export const enter = createAction(UserActionTypes.EnterPage);
+export const logout = createAction(UserActionTypes.LogoutPage);
+export const tokenExpired = createAction(UserActionTypes.TokenExpiredPage);
+// API part
+export const registerUser = createAction(UserActionTypes.RegisterUser, props<{ user: UserRegisterInterface }>());
+export const registerUserSuccess = createAction(UserActionTypes.RegisterUserSuccess, props<{ token: string }>());
+export const registerUserFailure = createAction(UserActionTypes.RegisterUserFailure, props<{ error: string }>()); // TODO need to describe errors
+export const loginUser = createAction(UserActionTypes.LoginUser, props<{ user: UserLoginInterface }>());
+export const loginUserSuccess = createAction(UserActionTypes.LoginUserSuccess, props<{ token: string }>());
+export const loginUserFailure = createAction(UserActionTypes.LoginUserFailure, props<{ error: string }>()); // TODO need to describe errors

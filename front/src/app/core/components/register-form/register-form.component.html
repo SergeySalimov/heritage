@@ -19,14 +19,14 @@
         <mat-error>Введите ваш пол</mat-error>
       </mat-form-field>
       <mat-form-field>
-        <input matInput type="email" placeholder="Почта" [(ngModel)]="registerUser.email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+        <input matInput type="email" placeholder="Почта" [(ngModel)]="registerUser.email" name="email" required pattern="[a-z0-9._%\-+]+@[a-z0-9.\-]+\.[a-z]{2,4}$">
         <mat-error>Введите валидный почтовый адрес</mat-error>
       </mat-form-field>
       <mat-form-field>
         <input matInput type="password" placeholder="Пароль" [(ngModel)]="registerUser.password" name="password" required minlength="4" maxlength="16">
         <mat-error>Введите пароль не менее 4 и не более 16 символов</mat-error>
       </mat-form-field>
-      <button mat-raised-button color="primary" [disabled]="!registerForm.form.valid || loading">Зарегистрировать</button>
+      <button mat-raised-button color="primary" [disabled]="!registerForm.form.valid || !!loading">Зарегистрировать</button>
     </form>
   </mat-card-content>
 </mat-card>

@@ -1,6 +1,6 @@
-import { IUser } from '../../core/interfaces/user';
 import { createFeature, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import { UserActions, UserApiActions } from './user.actions';
+import * as UserActions from 'src/app/state/user/user.actions';
+import { IUser } from '../../core/interfaces/user';
 
 export interface UserState {
   user: IUser,
@@ -22,21 +22,21 @@ export const userFeature = createFeature({
   name: userFeatureKey,
   reducer: createReducer(
     initialState,
-    on(UserApiActions.registerUser, (state, { user: { name, email, gender, surname } }) => ({
+    on(UserActions.registerUser, (state, { user: { name, email, gender, surname } }) => ({
         ...state, user: {...state.user, name, surname, email, gender }, loading: true,
       }),
     ),
-    on(UserApiActions.loginUser, (state, { user: { email }}) =>
+    on(UserActions.loginUser, (state, { user: { email }}) =>
       ({ ...state, user: { ...state.user, email }, loading: true }),
     ),
     on(
-      UserApiActions.registerUserSuccess,
-      UserApiActions.loginUserSuccess,
+      UserActions.registerUserSuccess,
+      UserActions.loginUserSuccess,
       (state, { token }) => ({ ...state, token, loading: false }),
     ),
     on(
-      UserApiActions.registerUserFailure,
-      UserApiActions.loginUserFailure,
+      UserActions.registerUserFailure,
+      UserActions.loginUserFailure,
       (state, { error }) => ({ ...state, error, user: initialUser(), loading: false }),
     ),
     on(UserActions.logout, state => ({ ...state, user: initialUser(), token: null })),
