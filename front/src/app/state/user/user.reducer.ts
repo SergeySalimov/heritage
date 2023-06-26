@@ -1,5 +1,5 @@
 import { createFeature, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import * as UserActions from 'src/app/state/user/user.actions';
+import * as UserActions from '../../state/user/user.actions';
 import { IUser } from '../../core/interfaces/user';
 
 export interface UserState {
