@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './schemas/user.schema';
 import { UserDto } from './schemas/user';
@@ -12,7 +12,7 @@ export class UsersController {
   constructor(private userService: UsersService) {}
 
   @ApiOperation({ summary: 'Create user' })
-  @ApiResponse({ status: 200, type: User })
+  @ApiResponse({ status: HttpStatus.CREATED, type: User })
   @UseGuards(JwtAuthGuard)
   @Post()
   createUser(@Body() userDto: UserDto): Promise<User> {
@@ -20,7 +20,7 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: 'Get all users' })
-  @ApiResponse({ status: 200, type: [User] })
+  @ApiResponse({ status: HttpStatus.OK, type: [User] })
   @UseGuards(JwtAuthGuard)
   @Get()
   getAllUsers(): Promise<User[]> {
