@@ -12,3 +12,11 @@ export const AUTH_URL_TOKEN = new InjectionToken<string>('auth url', {
     return `${baseUrl}/auth`;
   },
 });
+
+export const FAMILY_URL_TOKEN = new InjectionToken<string>('tree url', {
+  providedIn: 'root',
+  factory: () => {
+    const baseUrl = inject(BASE_URL_TOKEN);
+    return `${baseUrl}/family`;
+  }
+});

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RegisterFormComponent, UserRegisterInterface } from '../../core/components/register-form/register-form.component';
 import { Store } from '@ngrx/store';
-import * as UserActions from '../../state/user/user.actions';
+import * as userActions from '../../state/user/user.actions';
 import * as fromUser from '../../state/user/user.reducer';
 import { LetModule, PushModule } from '@ngrx/component';
 import { Observable } from 'rxjs';
@@ -32,6 +32,6 @@ export class RegisterComponent {
   private store = inject(Store);
   loading$: Observable<boolean> = this.store.select(fromUser.selectLoading);
   onUserRegister(user: UserRegisterInterface): void {
-    this.store.dispatch(UserActions.registerUser({ user }));
+    this.store.dispatch(userActions.registerUser({ user }));
   }
 }

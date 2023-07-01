@@ -1,7 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { JsonPipe, NgIf } from '@angular/common';
-import { UserService } from '../../core/services/user.service';
 import { MatButtonModule } from '@angular/material/button';
+import { Store } from '@ngrx/store';
+import { UserService } from '../../core/services/user.service';
+import * as treeActions from '../../state/tree/tree.actions';
 
 @Component({
   selector: 'app-tree',
@@ -14,14 +16,11 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.scss']
 })
-export class TreeComponent {
-  userService = inject(UserService);
+export class TreeComponent implements OnInit {
+  userService: UserService = inject(UserService);
+  store: Store = inject(Store);
 
-  users: any;
-
-  onTestClick(): void {
-    this.userService.getAllUsers().subscribe((data => {
-      this.users = data;
-    }));
+  ngOnInit(): void {
+    this.store.dispatch(treeActions.enter());
   }
 }

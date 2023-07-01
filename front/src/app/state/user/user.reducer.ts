@@ -32,7 +32,9 @@ export const userFeature = createFeature({
     on(
       UserActions.registerUserSuccess,
       UserActions.loginUserSuccess,
-      (state, { token }) => ({ ...state, token, loading: false }),
+      (state, { response: { token, id } }) => ({
+        ...state, token, loading: false, user: { ...state.user, id }
+      }),
     ),
     on(
       UserActions.registerUserFailure,
@@ -43,7 +45,8 @@ export const userFeature = createFeature({
   ),
 });
 
-export const { selectLoading } = userFeature;
+export const { selectLoading, selectUser } = userFeature;
 
-export const selectUser = createFeatureSelector<UserState>(userFeatureKey);
-export const isUserLogged = createSelector(selectUser, (state: UserState) => !!state.user.email);
+export const selectUserState = createFeatureSelector<UserState>(userFeatureKey);
+export const isUserLogged = createSelector(selectUserState, (state: UserState) => !!state.user.email);
+export const getCurrentUserId = createSelector(selectUser, (user: IUser) => user?.id ?? null);

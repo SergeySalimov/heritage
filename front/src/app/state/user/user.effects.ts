@@ -3,14 +3,15 @@ import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, mergeMap, of, tap } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as UserActions from '../../state/user/user.actions';
-import * as AlertActions from '../../state/alert/alert.actions';
+import * as userActions from '../../state/user/user.actions';
+import * as alertActions from '../../state/alert/alert.actions';
 import { TOKEN_EXPIRED_ALERT } from '../alert/alert.reducer';
 import { UserService } from '../../core/services/user.service';
 import { StorageService, StorageType, TOKEN_STORAGE_KEY } from '../../core/services/storage.service';
 import { ApiUtils } from '../../core/utils/api-utils';
+import { TokenData } from '../../core/interfaces/token';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class UserEffects {
   private actions$ = inject(Actions);
   private userService = inject(UserService);
@@ -19,28 +20,28 @@ export class UserEffects {
   private tokenKey = inject(TOKEN_STORAGE_KEY);
 
   registerUser$ = createEffect(() => this.actions$.pipe(
-    ofType(UserActions.registerUser),
+    ofType(userActions.registerUser),
     exhaustMap((action) => this.userService.registerUser(action.user).pipe(
-      map(({ token }) => UserActions.registerUserSuccess({ token })),
-      catchError((error) => of(UserActions.registerUserFailure({ error }))),
+      map((response: TokenData) => userActions.registerUserSuccess({ response })),
+      catchError((error) => of(userActions.registerUserFailure({ error }))),
     )),
   ));
 
   loginUser$ = createEffect(() => this.actions$.pipe(
-    ofType(UserActions.loginUser),
+    ofType(userActions.loginUser),
     exhaustMap((action) => this.userService.loginUser(action.user).pipe(
-      map(({ token }) => UserActions.loginUserSuccess({ token })),
-      catchError((error) => of(UserActions.loginUserFailure({ error }))),
+      map((response: TokenData) => userActions.loginUserSuccess({ response })),
+      catchError((error) => of(userActions.loginUserFailure({ error }))),
     )),
   ));
 
   afterAuthSuccess$ = createEffect(() => this.actions$.pipe(
     ofType(
-      UserActions.loginUserSuccess,
-      UserActions.registerUserSuccess,
+      userActions.loginUserSuccess,
+      userActions.registerUserSuccess,
     ),
     tap((action) => {
-      const token: string = action.token;
+      const token: string = action.response.token;
       const expDate: number|null = ApiUtils.getExpInMstFromJWT(token);
       this.storageService.set(this.tokenKey, token, StorageType.Session, expDate);
       this.router.navigate(['tree']);
@@ -48,15 +49,15 @@ export class UserEffects {
   ), { dispatch: false });
 
   tokenExpired$ = createEffect(() => this.actions$.pipe(
-    ofType(UserActions.tokenExpired),
+    ofType(userActions.tokenExpired),
     mergeMap(() => [
-      UserActions.logout(),
-      AlertActions.showAlert({ alert: TOKEN_EXPIRED_ALERT })
+      userActions.logout(),
+      alertActions.showAlert({ alert: TOKEN_EXPIRED_ALERT })
     ]),
   ));
 
   logout$ = createEffect(() => this.actions$.pipe(
-    ofType(UserActions.logout),
+    ofType(userActions.logout),
     tap(() => {
       this.storageService.delete(this.tokenKey, StorageType.Session);
       this.router.navigate(['login']);
