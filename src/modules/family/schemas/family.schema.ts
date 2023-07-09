@@ -24,3 +24,11 @@ export class Family {
 }
 
 export const FamilySchema = SchemaFactory.createForClass(Family);
+/********************************************************
+* This will provide id instead of _id, also remove __v  *
+*********************************************************/
+FamilySchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+  transform: function (_, obj) {  delete obj._id  },
+});

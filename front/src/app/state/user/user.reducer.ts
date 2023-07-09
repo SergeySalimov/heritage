@@ -1,6 +1,7 @@
 import { createFeature, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
 import * as UserActions from '../../state/user/user.actions';
 import { IUser } from '../../core/interfaces/user';
+import { UserUtils } from './user.utils';
 
 export interface UserState {
   user: IUser,
@@ -42,6 +43,9 @@ export const userFeature = createFeature({
       (state, { error }) => ({ ...state, error, user: initialUser(), loading: false }),
     ),
     on(UserActions.logout, state => ({ ...state, user: initialUser(), token: null })),
+    on(UserActions.provideUserData, (state, action) => ({
+      ...state, user: UserUtils.provideFamilyToUser(state.user, action.data),
+    })),
   ),
 });
 

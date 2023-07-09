@@ -1,7 +1,7 @@
 import { GenderEnum } from './user';
 
 export interface Family {
-  _id: string;
+  id: string;
   userId: string | null;
   name: string;
   surname: string;
