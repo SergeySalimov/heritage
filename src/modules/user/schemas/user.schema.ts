@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, ObjectId } from "mongoose";
 import { ApiProperty } from '@nestjs/swagger';
 import { Gender } from './user';
 
@@ -7,6 +7,8 @@ export type UserDocument = HydratedDocument<User>;
 
 @Schema({  })
 export class User {
+  id: ObjectId;
+
   @ApiProperty({ example: 'John', description: 'User name' })
   @Prop({ required: true })
   name: string;

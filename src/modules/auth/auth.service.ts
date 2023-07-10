@@ -5,10 +5,16 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { User } from '../user/schemas/user.schema';
 import { TokenDto } from './schemas/auth';
+import { FamilyService } from "../family/family.service";
+import { FamilyUtils } from "../../core/utils/family.utils";
 
 @Injectable()
 export class AuthService {
-  constructor(private userService: UsersService, private jwtService: JwtService) {}
+  constructor(
+    private userService: UsersService,
+    private jwtService: JwtService,
+    private familyService: FamilyService,
+  ) {}
 
   async login(userDto: LoginUserDto): Promise<TokenDto> {
     const user: User = await this.validateUser(userDto);
@@ -16,7 +22,7 @@ export class AuthService {
   }
 
   async registration(userDto: UserDto): Promise<TokenDto> {
-    const candidate = await this.userService.getUsersByEmail(userDto.email);
+    const candidate: User = await this.userService.getUsersByEmail(userDto.email);
 
     if(candidate) {
       throw new HttpException('User with this email exists', HttpStatus.BAD_REQUEST);
@@ -25,6 +31,8 @@ export class AuthService {
     try {
       const hashPassword = await bcrypt.hash(userDto.password, 5); // TODO replace on SALT const
       const user: User = await this.userService.create({ ...userDto, password: hashPassword });
+
+      await this.familyService.create(FamilyUtils.mapUserToFamily(userDto, user.id));
 
       return this.generateToken(user);
     }
@@ -38,6 +46,7 @@ export class AuthService {
     const payload = { email: user.email };
     return {
       token: this.jwtService.sign(payload),
+      id: user.id,
     }
   }
 

@@ -6,6 +6,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { AppController } from './app.controller';
 import * as process from 'process';
 import { FrontendMiddleware } from './core/middlewares/front.middleware';
+import { FamilyModule } from "./modules/family/family.module";
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { FrontendMiddleware } from './core/middlewares/front.middleware';
     MongooseModule.forRoot(process.env.MONGO_DB_PATH),
     UsersModule,
     AuthModule,
+    FamilyModule,
   ],
   controllers: [AppController],
   providers: [],

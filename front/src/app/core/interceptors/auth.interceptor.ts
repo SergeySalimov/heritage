@@ -2,9 +2,9 @@ import { inject } from '@angular/core';
 import { HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { StorageService, StorageType, TOKEN_STORAGE_KEY } from '../services/storage.service';
-import { AUTH_URL_TOKEN } from '../services/tokens';
+import { AUTH_URL_TOKEN } from '../injection-tokens/api.token';
 import { Store } from '@ngrx/store';
-import * as UserActions from 'src/app/state/user/user.actions';
+import * as UserActions from '../../state/user/user.actions';
 
 export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
   const authUrl = inject(AUTH_URL_TOKEN);
@@ -13,8 +13,8 @@ export function authInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn):
   }
   // Get the auth token from the service.
   const storageService = inject(StorageService);
-  const tokeKeyInStorage = inject(TOKEN_STORAGE_KEY);
-  const token = storageService.get(tokeKeyInStorage, StorageType.Session);
+  const tokenKeyInStorage = inject(TOKEN_STORAGE_KEY);
+  const token = storageService.get(tokenKeyInStorage, StorageType.Session);
   if (!token) {
     inject(Store).dispatch(UserActions.tokenExpired());
     return next(req);

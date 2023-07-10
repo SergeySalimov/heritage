@@ -1,6 +1,7 @@
 import { createFeature, createFeatureSelector, createReducer, createSelector, on } from '@ngrx/store';
-import * as UserActions from 'src/app/state/user/user.actions';
+import * as UserActions from '../../state/user/user.actions';
 import { IUser } from '../../core/interfaces/user';
+import { UserUtils } from './user.utils';
 
 export interface UserState {
   user: IUser,
@@ -32,7 +33,9 @@ export const userFeature = createFeature({
     on(
       UserActions.registerUserSuccess,
       UserActions.loginUserSuccess,
-      (state, { token }) => ({ ...state, token, loading: false }),
+      (state, { response: { token, id } }) => ({
+        ...state, token, loading: false, user: { ...state.user, id }
+      }),
     ),
     on(
       UserActions.registerUserFailure,
@@ -40,10 +43,14 @@ export const userFeature = createFeature({
       (state, { error }) => ({ ...state, error, user: initialUser(), loading: false }),
     ),
     on(UserActions.logout, state => ({ ...state, user: initialUser(), token: null })),
+    on(UserActions.provideUserData, (state, action) => ({
+      ...state, user: UserUtils.provideFamilyToUser(state.user, action.data),
+    })),
   ),
 });
 
-export const { selectLoading } = userFeature;
+export const { selectLoading, selectUser } = userFeature;
 
-export const selectUser = createFeatureSelector<UserState>(userFeatureKey);
-export const isUserLogged = createSelector(selectUser, (state: UserState) => !!state.user.email);
+export const selectUserState = createFeatureSelector<UserState>(userFeatureKey);
+export const isUserLogged = createSelector(selectUserState, (state: UserState) => !!state.user.email);
+export const getCurrentUserId = createSelector(selectUser, (user: IUser) => user?.id ?? null);

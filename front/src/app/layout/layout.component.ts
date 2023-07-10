@@ -16,8 +16,8 @@ import { isUserLogged } from '../state/user/user.reducer';
 import { ModalComponent } from '../core/components/ui-blocks/modal/modal.component';
 import { YesOrNo } from '../core/interfaces/common';
 import * as fromAlert from '../state/alert/alert.reducer';
-import * as AlertActions from 'src/app/state/alert/alert.actions';
-import * as UserActions from 'src/app/state/user/user.actions';
+import * as AlertActions from '../state/alert/alert.actions';
+import * as UserActions from '../state/user/user.actions';
 import { SnackbarComponent } from '../core/components/ui-blocks/snackbar/snackbar.component';
 import { IAlert } from '../state/alert/alert.reducer';
 

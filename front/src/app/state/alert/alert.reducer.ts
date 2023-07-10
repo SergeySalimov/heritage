@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import * as AlertActions from 'src/app/state/alert/alert.actions';
+import * as AlertActions from '../../state/alert/alert.actions';
 
 export enum AlertEnum {
   ERROR = 'error',
