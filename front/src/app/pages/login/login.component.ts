@@ -6,7 +6,7 @@ import * as userActions from '../../state/user/user.actions';
 import { Observable } from 'rxjs';
 import { LetModule, PushModule } from '@ngrx/component';
 import { NgIf } from '@angular/common';
-import { LoaderComponent } from '../../core/components/ui-blocks/loader/loader.component';
+import { LoaderComponent } from '../../core/components/ui-blocks';
 
 @Component({
   selector: 'app-login',

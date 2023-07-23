@@ -22,7 +22,12 @@
     "strictPropertyInitialization": false,
     "typeRoots": [
       "node_modules/@types"
-    ]
+    ],
+    "paths": {
+      "@app/core/components": ["src/app/core/components/index.ts"],
+      "@app/core/components/ui-blocks": ["src/app/core/components/ui-blocks/index.ts"],
+      "@app/core/interfaces": ["src/app/core/interfaces/index.ts"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

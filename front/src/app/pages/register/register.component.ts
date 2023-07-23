@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RegisterFormComponent, UserRegisterInterface } from '../../core/components/register-form/register-form.component';
+import { NgIf } from '@angular/common';
 import { Store } from '@ngrx/store';
-import * as userActions from '../../state/user/user.actions';
-import * as fromUser from '../../state/user/user.reducer';
 import { LetModule, PushModule } from '@ngrx/component';
 import { Observable } from 'rxjs';
-import { LoaderComponent } from '../../core/components/ui-blocks/loader/loader.component';
-import { NgIf } from '@angular/common';
-
+import * as fromUser from '../../state/user/user.reducer';
+import * as userActions from '../../state/user/user.actions';
+import { LoaderComponent } from '../../core/components/ui-blocks';
+import { RegisterFormComponent, UserRegisterInterface } from '../../core/components';
 
 @Component({
   standalone: true,

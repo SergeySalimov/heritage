@@ -1,0 +1,64 @@
+@import 'variables';
+
+.container {
+  position: relative;
+}
+
+.table-container {
+  position: relative;
+  min-height: 200px;
+  max-height: calc(100vh - 300px);
+  overflow: auto;
+
+  scrollbar-width: thin;
+  scrollbar-color: $control rgba(242, 243, 245, 0);
+  &::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    overflow: visible;
+    background-color: $control;
+    // use $gray-100 with opacity 0 for effect of margins of scrollbar
+    border: 3px solid rgba(242, 243, 245, 0);
+    // hide the background with background clip
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .table-container {
+    max-height: 230px;
+  }
+}
+
+table {
+  width: 100%;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  background-color: $control;
+  cursor: pointer;
+}
+
+.mat-mdc-row.clicked-row .mat-mdc-cell {
+  background-color: $primary;
+  font-weight: bold;
+}
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+  max-width: 64px;
+}
+
+.mat-column-created {
+  max-width: 124px;
+}

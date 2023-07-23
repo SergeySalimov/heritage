@@ -39,6 +39,13 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         loadComponent: () => import('../pages/tree/tree.component').then(c => c.TreeComponent),
       },
+      {
+        path: 'enter-data',
+        title: 'Enter family tree data',
+        // TODO uncomment guard after implementation done
+        // canActivate: [AuthGuard],
+        loadComponent: () => import('../pages/enter-tree-data/enter-tree-data.component').then(c => c.EnterTreeDataComponent),
+      },
     ],
   },
   {

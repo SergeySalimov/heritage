@@ -14,12 +14,18 @@
           <mat-divider></mat-divider>
           <a mat-list-item routerLink="tree" routerLinkActive="active">Семейное дерево</a>
           <mat-divider></mat-divider>
+          <a mat-list-item routerLink="enter-data" routerLinkActive="active">Ввод данных</a>
+          <mat-divider></mat-divider>
           <a mat-list-item routerLink="information" routerLinkActive="active">Информация</a>
           <mat-divider></mat-divider>
           <a mat-list-item (click)="logOut()">Выход</a>
           <mat-divider></mat-divider>
         </ng-container>
         <ng-template #needToLoginUser>
+<!--          TODO temporary here-->
+          <mat-divider></mat-divider>
+          <a mat-list-item routerLink="enter-data" routerLinkActive="active">Ввод данных</a>
+<!--          TODO end of deletion-->
           <mat-divider></mat-divider>
           <a mat-list-item routerLink="register" routerLinkActive="active">Регистрация</a>
           <mat-divider></mat-divider>
