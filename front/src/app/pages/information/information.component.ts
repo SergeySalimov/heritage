@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './information.component.html',
-  styleUrls: ['./information.component.scss']
+  styleUrls: ['./information.component.scss'],
 })
 export class InformationComponent {
 

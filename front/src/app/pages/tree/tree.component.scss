@@ -1,0 +1,23 @@
+:host {
+  position: relative;
+
+  .button-tree {
+    z-index: 1;
+    position: absolute;
+    top: 20px;
+    left: 100px;
+  }
+
+  #FamilyChart {
+
+    svg.main_svg {
+      width: 200px !important;
+    }
+
+
+  }
+  .card-cont {
+    cursor: pointer !important;
+  }
+}
+
