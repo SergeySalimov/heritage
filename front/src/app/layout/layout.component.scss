@@ -1,3 +1,5 @@
+@import 'variables';
+
 .sidenav-container {
   height: 100%;
 }
@@ -18,6 +20,6 @@
 
 :host {
   .active {
-    background-color: lightgray;
+    background-color: $control;
   }
 }

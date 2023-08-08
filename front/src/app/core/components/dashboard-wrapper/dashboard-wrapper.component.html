@@ -1,0 +1,44 @@
+<ng-container *ngrxLet="{
+  isWeb: isWeb$,
+  isInfo: isInfo$,
+  isInfo1: isInfo1$,
+  isInfo2: isInfo2$
+} as data">
+  <div class="grid-container m-2">
+    <h1 class="mat-h1 mb-1 mx-3">Ввод данных</h1>
+    <mat-grid-list
+      #fh='fluentHeight'
+      [rowHeight]="data.isWeb ? (fh.fluentHeightChange | async) ?? '300px' : '400px'"
+      appDashboardMainCardHeight
+      cols="2"
+      class="card-container"
+    >
+      <mat-grid-tile
+        [colspan]="data.isWeb ? data.isInfo ? 1 : 2 : 2"
+        [rowspan]="data.isWeb ? 2 : data.isInfo ? 1 : 2"
+      >
+        <app-dashboard-main-card
+          [title]="'Список всех родственников'"
+        />
+      </mat-grid-tile>
+      <mat-grid-tile
+        *ngIf="data.isInfo1"
+        [colspan]="data.isWeb ? 1 : 2"
+        [rowspan]="data.isInfo2 ? 1 : data.isWeb ? 2 : 1"
+      >
+        <app-dashboard-info-card
+          [title]="'Инфо 1'"
+        />
+      </mat-grid-tile>
+      <mat-grid-tile
+        *ngIf="data.isInfo2"
+        [colspan]="data.isWeb ? 1 : 2"
+        [rowspan]="1"
+      >
+        <app-dashboard-info-card
+          [title]="'Инфо 2'"
+        />
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</ng-container>

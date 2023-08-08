@@ -93,14 +93,10 @@ $mat-accent: (
   )
 );
 
-$primary: mat.define-palette($mat-primary, 500);
-
-$accent: mat.define-palette($mat-accent, A200, A100, A400);
-
 $theme: mat.define-light-theme((
   color: (
-    primary: $primary,
-    accent: $accent,
+    primary: mat.define-palette($mat-primary, 400),
+    accent: mat.define-palette($mat-accent, A200, A100, A400),
   ),
   typography: mat.define-typography-config(),
   density: 0,
